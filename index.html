@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anh xin lỗi em ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: sans-serif;
+      text-align: center;
+    }
+    h1 { font-size: 2rem; color: #333; }
+    .heart { font-size: 3rem; animation: beat 1s infinite; }
+    @keyframes beat { 0%,100%{transform:scale(1);} 50%{transform:scale(1.2);} }
+    .btns {
+      margin-top: 20px;
+      position: relative;
+      width: 300px;
+      height: 120px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+    button {
+      padding: 12px 20px;
+      font-size: 1.2rem;
+      border-radius: 25px;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+    }
+    #yesBtn {
+      background: #ff4d6d;
+      color: white;
+      position: static; /* nút vầnggggg giữ nguyên chỗ, không bị đè */
+    }
+    #noBtn {
+      background: white;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="heart">❤️</div>
+    <h1>Tha lỗi cho anh nha?</h1>
+    <div class="btns" id="btnWrap">
+      <button id="yesBtn">vầnggggg</button>
+      <button id="noBtn">khồngggggg</button>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const wrap = document.getElementById("btnWrap");
+
+    function moveNoBtn() {
+      const wrapRect = wrap.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+
+      // chỉ cho phép chạy trong vùng bên trên nút vầnggggg
+      const maxLeft = wrapRect.width - btnRect.width - 10;
+      const maxTop = wrapRect.height - btnRect.height - 50; // giới hạn cao hơn nút yes
+
+      const left = Math.random() * maxLeft;
+      const top = Math.random() * maxTop;
+
+      noBtn.style.left = left + "px";
+      noBtn.style.top = top + "px";
+    }
+
+    noBtn.addEventListener("mouseenter", moveNoBtn);
+    noBtn.addEventListener("click", e => { e.preventDefault(); moveNoBtn(); });
+
+    yesBtn.addEventListener("click", () => {
+      window.location.href = "thanks.html";
+    });
+
+    window.onload = moveNoBtn;
+  </script>
+</body>
+</html>
